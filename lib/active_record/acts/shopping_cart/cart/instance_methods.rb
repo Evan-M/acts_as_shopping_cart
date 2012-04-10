@@ -80,7 +80,7 @@ module ActiveRecord
           end
 
           def shopping_cart_items
-            eval self.class.shopping_cart_item_collection
+            eval self.class.shopping_cart_items_collection
           end
           
         end
