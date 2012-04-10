@@ -79,10 +79,10 @@ module ActiveRecord
             shopping_cart_items.inject(0) { |sum, item| sum += item.quantity }
           end
 
-          def cart_items
-            warn "ShoppingCart#cart_items WILL BE DEPRECATED IN LATER VERSIONS OF acts_as_shopping_cart, please use ShoppingCart#shopping_cart_items instead"
-            self.shopping_cart_items
+          def shopping_cart_items
+            eval self.class.shopping_cart_item_collection
           end
+          
         end
       end
     end

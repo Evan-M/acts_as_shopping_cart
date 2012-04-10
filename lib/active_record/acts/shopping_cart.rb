@@ -1,6 +1,8 @@
 module ActiveRecord
   module Acts
     module ShoppingCart
+      attr_reader :shopping_cart_items_collection
+      
       def self.included(base)
         base.extend(ClassMethods)
       end
@@ -19,8 +21,8 @@ module ActiveRecord
         def acts_as_shopping_cart_using(item_class)
           self.send :include, ActiveRecord::Acts::ShoppingCart::Cart::InstanceMethods
           self.send :include, ActiveRecord::Acts::ShoppingCart::Item::InstanceMethods
-          has_many :shopping_cart_items, :class_name => item_class.to_s.classify,
-              :as => :owner, :dependent => :destroy
+          @shopping_cart_items_collection = item_class.to_s.pluralize
+          has_many @shopping_cart_items_collection.to_sym, :as => :owner, :dependent => :destroy
         end
 
         #
